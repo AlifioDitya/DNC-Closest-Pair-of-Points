@@ -3,6 +3,7 @@ import numpy as np
 import time
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
+from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg)
 
 def brute_force_closest_pair(space):
     """
@@ -35,7 +36,7 @@ def brute_force_closest_pair(space):
     return pair
     
 
-def run_brute_force_closest_pair(answer):
+def run_brute_force_closest_pair(answer, frame):
     # Generate random 3D data
     n = 100
     x = np.random.rand(n)
@@ -79,4 +80,7 @@ def run_brute_force_closest_pair(answer):
 
     # Show the plot
     ax.set_title("3D Scatter Plot")
-    plt.show()
+    canvas = FigureCanvasTkAgg(figure,
+                               master = frame)
+    canvas.draw()
+    canvas.get_tk_widget().pack(padx=50, pady=(0, 50))
