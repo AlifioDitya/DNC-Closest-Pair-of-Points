@@ -1,3 +1,5 @@
+import math
+
 class Point:
     """
     Represents a point in R^n space.
@@ -59,7 +61,7 @@ class Point:
             raise TypeError("unsupported operand type(s) for distance_to: 'Point' and '{type(other).__name__}'")
         if len(self) != len(other):
             raise ValueError("Points must have the same dimension to calculate distance between them")
-        return ((self - other) ** 2).sum() ** 0.5
+        return math.sqrt(sum((a - b) ** 2 for a, b in zip(self.coor, other.coor)))
 
     def __mul__(self, other):
         if isinstance(other, (int, float)):
