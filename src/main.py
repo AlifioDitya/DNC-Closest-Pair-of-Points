@@ -4,10 +4,11 @@
 from module import bruteforce as bf
 import tkinter as tk
 from tkinter import *
+from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg)
 
 # Function to display brute force answer on GUI
 def display_bf(event):
-    bf.run_brute_force_closest_pair(answer, frame)
+    bf.run_brute_force_closest_pair(answer, frame, canvas)
 
 # Initializing GUI
 window = tk.Tk()
@@ -32,5 +33,8 @@ button1.bind("<Button-1>", display_bf)
 
 label3 = tk.Label(master=frame, textvariable=answer, font=("Courier", 10))
 label3.pack(padx=50, pady=10)
+
+canvas = Canvas(frame) 
+canvas.pack(padx=50, pady=(0,50))
 
 window.mainloop()

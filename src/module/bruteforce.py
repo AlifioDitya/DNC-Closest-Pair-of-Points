@@ -36,7 +36,7 @@ def brute_force_closest_pair(space):
     return pair
     
 
-def run_brute_force_closest_pair(answer, frame):
+def run_brute_force_closest_pair(answer, frame, canvas):
     # Generate random 3D data
     n = 100
     x = np.random.rand(n)
@@ -78,9 +78,16 @@ def run_brute_force_closest_pair(answer, frame):
     # Plot a line between the two points
     ax.plot([p1[0], p2[0]], [p1[1], p2[1]], [p1[2], p2[2]], "Red")
 
-    # Show the plot
+    # Set Plot Title
     ax.set_title("3D Scatter Plot")
-    canvas = FigureCanvasTkAgg(figure,
-                               master = frame)
-    canvas.draw()
-    canvas.get_tk_widget().pack(padx=50, pady=(0, 50))
+
+    # Destroy last plot
+    if output:
+        for child in canvas.winfo_children():
+            child.destroy()
+    output = None
+    
+    # Show the plot
+    output = FigureCanvasTkAgg(figure, master = canvas)
+    output.draw()
+    output.get_tk_widget().pack()
