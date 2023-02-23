@@ -1,6 +1,4 @@
-# from module.Point import Point
-from Point import Point
-import random
+from module.Point import Point
 
 def partition(points, low, high):
     """
@@ -64,12 +62,30 @@ def quicksort(points, low, high):
     
     return points
 
-# Test
-# n = 10
-# x = [random.randint(1, 100) for _ in range(n)]
-# y = [random.randint(1, 100) for _ in range(n)]
-# z = [random.randint(1, 100) for _ in range(n)]
+def split_points(points, split, axis):
+    """
+    Splits points into two sections based off of an axis.
 
-# points = [Point(xi, yi, zi) for xi, yi, zi in zip(x, y, z)]
+    Parameters
+    ----------
+    points: a list of Point objects
+    split: Coordinate to split on
+    axis: Dimension axis
 
-# print(quicksort(points, 0, len(points)-1))
+    Returns
+    ----------
+    left: a list of points with coordinate on the left of split
+    right: a list of points with coordinate on the right of split
+    """
+
+    left = []
+    right = []
+
+    for point in points:
+        if point[axis] <= split:
+            left.append(point)
+        else:
+            right.append(point)
+
+    return left, right
+
