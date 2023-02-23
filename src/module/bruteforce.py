@@ -1,9 +1,9 @@
 from module.Point import Point
-import numpy as np
+import random
 import time
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
-from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg)
+from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg, NavigationToolbar2Tk)
 
 def brute_force_closest_pair(space):
     """
@@ -38,10 +38,10 @@ def brute_force_closest_pair(space):
 
 def run_brute_force_closest_pair(answer, frame, canvas):
     # Generate random 3D data
-    n = 100
-    x = np.random.rand(n)
-    y = np.random.rand(n)
-    z = np.random.rand(n)
+    n = 64
+    x = [random.randint(1, 100) for _ in range(n)]
+    y = [random.randint(1, 100) for _ in range(n)]
+    z = [random.randint(1, 100) for _ in range(n)]
 
     # Pack the data into Point objects
     points = [Point(xi, yi, zi) for xi, yi, zi in zip(x, y, z)]
@@ -90,4 +90,7 @@ def run_brute_force_closest_pair(answer, frame, canvas):
     # Show the plot
     output = FigureCanvasTkAgg(figure, master = canvas)
     output.draw()
+    toolbar = NavigationToolbar2Tk(output,
+                                   canvas)
+    toolbar.update()
     output.get_tk_widget().pack()
