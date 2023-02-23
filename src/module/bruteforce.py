@@ -38,7 +38,7 @@ def brute_force_closest_pair(space):
 
 def run_brute_force_closest_pair(answer, canvas):
     # Generate random 3D data
-    n = 64
+    n = 53
     x = [random.randint(1, 100) for _ in range(n)]
     y = [random.randint(1, 100) for _ in range(n)]
     z = [random.randint(1, 100) for _ in range(n)]

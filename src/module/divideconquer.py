@@ -149,18 +149,19 @@ def ClassifyPointsInStrip(left_p, right_p, x, temp_min):
         strip_points : a list of Point objects inside of the strip zone
     """
 
-    strip_points = []
+    left_strip_points = []
     i = len(left_p) - 1
     while(i >= 0 and abs(left_p[i][0] - x) <= temp_min):
-        strip_points.append(left_p[i])
+        left_strip_points.append(left_p[i])
         i -= 1
 
+    right_strip_points = []
     i = 0
     while(i < len(right_p) and abs(right_p[i][0] - x) <= temp_min):
-        strip_points.append(right_p[i])
+        right_strip_points.append(right_p[i])
         i += 1
 
-    return strip_points
+    return left_strip_points, right_strip_points
 
 def findSmallerThanMinimumDistance(point1, point2, distance, count):
     """
@@ -198,11 +199,11 @@ def findClosestPairInStrip(left_p, right_p, x, temp_min, temp_pair, count):
         new_min : New minimum distance
     """
 
-    strip_points = ClassifyPointsInStrip(left_p, right_p, x, temp_min)
+    left_strip_points, right_strip_points = ClassifyPointsInStrip(left_p, right_p, x, temp_min)
     new_min = temp_min
     new_pair = temp_pair
-    for point1 in strip_points:
-        for point2 in strip_points:
+    for point1 in left_strip_points:
+        for point2 in right_strip_points:
             if(point1 != point2):
                 valid, newDistance = findSmallerThanMinimumDistance(point1, point2, new_min, count)
                 if(valid):
@@ -221,16 +222,17 @@ def findClosestPair(points, count):
     Returns:
         distance : the smallest distance
     """
-
-    if(len(points) == 2):
+    if(len(points) <= 1):
+        return -1, ()
+    elif(len(points) == 2):
         count[0] += 1
         return points[0].distance_to(points[1]), (points[0], points[1])
     else:
         left_points, right_points, x = splitPoints(points)
         min_left, pair_left = findClosestPair(left_points, count)
         min_right, pair_right = findClosestPair(right_points, count)
-        temp_min = min_left if min_left < min_right else min_right
-        new_pair = pair_left if min_left < min_right else pair_right
+        temp_min = min_left if min_left < min_right and min_left > 0 else min_right
+        new_pair = pair_left if min_left < min_right and min_left > 0 else pair_right
         min_strip, pair_strip = findClosestPairInStrip(left_points, right_points, x, temp_min, new_pair, count)
         if(min_strip < temp_min):
             return min_strip, pair_strip
@@ -239,7 +241,7 @@ def findClosestPair(points, count):
 
 def run_divide_and_conquer_closest_pair(answer, canvas):
     # Generate random 3D data
-    n = 64
+    n = 53
     x = [random.randint(1, 100) for _ in range(n)]
     y = [random.randint(1, 100) for _ in range(n)]
     z = [random.randint(1, 100) for _ in range(n)]
