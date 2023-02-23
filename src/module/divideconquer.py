@@ -176,12 +176,11 @@ def findSmallerThanMinimumDistance(point1, point2, distance, count):
         boolean : True if smaller than the current minimum distance
         temp_distance : the new minimum distance
     """
-    for i in range (len(point1)):
-        if(abs(point1[i] - point2[i]) <= distance):
-            count[0] += 1
-            temp_distance = point1.distance_to(point2)
-            if(temp_distance < distance):
-                return True, temp_distance
+    if(abs(point1[0] - point2[0]) <= distance or abs(point1[1] - point2[1]) <= distance):
+        count[0] += 1
+        temp_distance = point1.distance_to(point2)
+        if(temp_distance < distance):
+            return True, temp_distance
     
     return False, 0
 
@@ -241,7 +240,7 @@ def findClosestPair(points, count):
 
 def run_divide_and_conquer_closest_pair(answer, canvas):
     # Generate random 3D data
-    n = 53
+    n = 1000
     x = [random.randint(1, 100) for _ in range(n)]
     y = [random.randint(1, 100) for _ in range(n)]
     z = [random.randint(1, 100) for _ in range(n)]

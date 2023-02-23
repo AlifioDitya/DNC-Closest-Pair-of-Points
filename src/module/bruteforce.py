@@ -27,18 +27,18 @@ def brute_force_closest_pair(space):
     pair = [space[0], space[1]]
 
     # Brute force by checking distance to each other for each points in space
-    for point1 in space:
-        for point2 in space:
-            if point1.distance_to(point2) < min_distance and point1 != point2:
-                min_distance = point1.distance_to(point2)
-                pair = [point1, point2]
+    for i in range (len(space)):
+        for j in range (i + 1, len(space)):
+            if space[i].distance_to(space[j]) < min_distance:
+                min_distance = space[i].distance_to(space[j])
+                pair = [space[i], space[j]]
 
     return pair
     
 
 def run_brute_force_closest_pair(answer, canvas):
     # Generate random 3D data
-    n = 53
+    n = 1000
     x = [random.randint(1, 100) for _ in range(n)]
     y = [random.randint(1, 100) for _ in range(n)]
     z = [random.randint(1, 100) for _ in range(n)]

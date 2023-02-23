@@ -23,9 +23,9 @@ frame = tk.Frame(master=window, width=1280, height=720)
 frame.pack()
 
 window.geometry("1280x720")
-window.title("Closest Point Pair App")
+window.title("Closest Pair of Points App")
 
-label1 = tk.Label(master=frame, text="Closest Point Pair", font=("Courier", 24))
+label1 = tk.Label(master=frame, text="Closest Pair of Points", font=("Courier", 24))
 label1.pack(padx=50, pady=10)
 
 label2 = tk.Label(master=frame, text="by: Michael Jonathan Halim | 13521124\n    Enrique Alifio Ditya   | 13521142", font=("Courier", 14))
