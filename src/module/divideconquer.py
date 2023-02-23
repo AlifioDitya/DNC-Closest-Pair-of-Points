@@ -176,7 +176,7 @@ def findSmallerThanMinimumDistance(point1, point2, distance, count):
         boolean : True if smaller than the current minimum distance
         temp_distance : the new minimum distance
     """
-    if(abs(point1[0] - point2[0]) <= distance or abs(point1[1] - point2[1]) <= distance):
+    if(abs(point1[0] - point2[0]) <= distance or (len(point1) > 1 and abs(point1[1] - point2[1]) <= distance)):
         count[0] += 1
         temp_distance = point1.distance_to(point2)
         if(temp_distance < distance):
@@ -238,17 +238,8 @@ def findClosestPair(points, count):
         else:
             return temp_min, new_pair
 
-def run_divide_and_conquer_closest_pair(answer, canvas):
-    # Generate random 3D data
-    n = 1000
-    x = [random.randint(1, 100) for _ in range(n)]
-    y = [random.randint(1, 100) for _ in range(n)]
-    z = [random.randint(1, 100) for _ in range(n)]
-
-    # Pack the data into Point objects
-    points = [Point(xi, yi, zi) for xi, yi, zi in zip(x, y, z)]
-
-    # Brute Force Algorithm
+def run_divide_and_conquer_closest_pair(points, answer):
+    # Divide And Conquer Algorithm
     start_time = time.time()
     points = quicksort(points, 0 , len(points) - 1)
     ed_count = [0]
@@ -259,45 +250,3 @@ def run_divide_and_conquer_closest_pair(answer, canvas):
     # Closest Pair and Their Distance
     output = "First Point: " + str(pair[0]) + "\n\n" + "Second Point: " + str(pair[1]) + "\n\n" + f"Minimum Distance: {min_distance}\n\n" + "Euclidian Calculation Count: " + str(ed_count[0]) + "\n\n" + f"Execution Time: {(end_time - start_time) * 1000} ms\n\n"
     answer.set(output)
-
-    # Create a 3D scatter plot
-    figure = plt.figure(figsize=(6, 6))
-    ax = figure.add_subplot(111, projection='3d')
-
-    # Filter points
-    x = [p[0] for p in points if p != pair[0] and p != pair[1]]
-    y = [p[1] for p in points if p != pair[0] and p != pair[1]]
-    z = [p[2] for p in points if p != pair[0] and p != pair[1]]
-
-    # Scatter plot
-    ax.scatter(x, y, z, alpha=0.25)
-    ax.scatter(pair[0][0], pair[0][1], pair[0][2])
-    ax.scatter(pair[1][0], pair[1][1], pair[1][2])
-
-    # Set the axis labels
-    ax.set_xlabel('X')
-    ax.set_ylabel('Y')
-    ax.set_zlabel('Z')
-
-    # Plot a line between the two points
-    ax.plot([pair[0][0], pair[1][0]], [pair[0][1], pair[1][1]], [pair[0][2], pair[1][2]], "Red")
-
-    # Set Plot Title
-    ax.set_title("3D Scatter Plot")
-
-    # Destroy last plot
-    if output:
-        for child in canvas.winfo_children():
-            child.destroy()
-    output = None
-    
-    # Show the plot
-    output = FigureCanvasTkAgg(figure, master = canvas)
-    output.draw()
-    toolbar = NavigationToolbar2Tk(output,
-                                   canvas)
-    toolbar.update()
-    output.get_tk_widget().pack()
-
-    # Comparing with brute force
-    testBF(points)
