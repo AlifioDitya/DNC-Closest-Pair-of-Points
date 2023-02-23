@@ -36,7 +36,7 @@ def brute_force_closest_pair(space):
     return pair
     
 
-def run_brute_force_closest_pair(answer, frame, canvas):
+def run_brute_force_closest_pair(answer, canvas):
     # Generate random 3D data
     n = 64
     x = [random.randint(1, 100) for _ in range(n)]
@@ -53,7 +53,7 @@ def run_brute_force_closest_pair(answer, frame, canvas):
 
     # Output
     # Closest Pair and Their Distance
-    output = "First Point: " + str(p1) + "\n\n" + "Second Point: " + str(p2) + "\n\n" + f"Minimum Distance: {p1.distance_to(p2)}\n\n" + "Euclidian Calculation Count: " + str((n-1) * n / 2) + "\n\n" + f"Execution Time: {(end_time - start_time) * 1000} ms\n\n"
+    output = "First Point: " + str(p1) + "\n\n" + "Second Point: " + str(p2) + "\n\n" + f"Minimum Distance: {p1.distance_to(p2)}\n\n" + "Euclidian Calculation Count: " + str(int((n-1) * n / 2)) + "\n\n" + f"Execution Time: {(end_time - start_time) * 1000} ms\n\n"
     answer.set(output)
 
     # Create a 3D scatter plot
