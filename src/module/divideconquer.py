@@ -178,13 +178,19 @@ def findSmallerThanMinimumDistance(point1, point2, distance, count):
         temp_distance : the new minimum distance
     """
 
-    # If abs(x1-x2) or abs(y1-y2) are smaller or equal to the current minimum distance
-    if(abs(point1[0] - point2[0]) <= distance or (len(point1) > 1 and abs(point1[1] - point2[1]) <= distance)):
-        count[0] += 1
-        # Calculate euclidean distance
-        temp_distance = point1.distance_to(point2)
-        if(temp_distance < distance):
-            return True, temp_distance
+    # Checking if point1 and point2 have smaller distance than the current minimum distance
+    check = 0
+    threshold = distance ** 2
+    for i in range (len(point1)):
+        check += (abs(point1[i] - point2[i]) ** 2)
+        if(check > threshold):
+            return False, 0
+    
+    # Calculate euclidean distance
+    count[0] += 1
+    temp_distance = point1.distance_to(point2)
+    if(temp_distance < distance):
+        return True, temp_distance
     
     return False, 0
 
@@ -214,10 +220,11 @@ def findClosestPairInStrip(left_p, right_p, x, temp_min, temp_pair, count):
     # Finding pair of points that are more closer than the initial pair
     for point1 in left_strip_points:
         for point2 in right_strip_points:
-            valid, newDistance = findSmallerThanMinimumDistance(point1, point2, new_min, count)
-            if(valid):
-                new_min = newDistance
-                new_pair = (point1, point2)
+            if(abs(point1[i] - point2[i]) <= new_min for i in range (len(point1))):
+                valid, newDistance = findSmallerThanMinimumDistance(point1, point2, new_min, count)
+                if(valid):
+                    new_min = newDistance
+                    new_pair = (point1, point2)
     
     return new_min, new_pair
 

@@ -111,7 +111,7 @@ input_n.pack()
 secondInput = tk.Frame(inputs, background='#1C1C1C')
 secondInput.pack(anchor="w")
 
-label_input_dimension = tk.Label(master=secondInput, text="Dimension                 = ", font=("Helvetica", 10), background='#1C1C1C', foreground="white")
+label_input_dimension = tk.Label(master=secondInput, text="Dimension                = ", font=("Helvetica", 10), background='#1C1C1C', foreground="white")
 label_input_dimension.pack(side=LEFT)
 input_dimension = Entry(secondInput, width = 20)
 input_dimension.focus_set()
