@@ -1,4 +1,6 @@
 import time
+import matplotlib.pyplot as plt
+from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg, NavigationToolbar2Tk)
 
 def partition(points, low, high):
     """
@@ -262,13 +264,15 @@ def findClosestPair(points, count):
         else:
             return temp_min, new_pair
 
-def run_divide_and_conquer_closest_pair(points, answer):
+def run_divide_and_conquer_closest_pair(points, answer, canvas, is3D):
     """
     Run divide and conquer algorithm to the closest pair of points problem and display the solution on GUI
 
     Args:
         points (list): list of point objects
         answer (string): solution
+        canvas (widget): widget to display plot on GUI
+        is3D (boolean): check if the points can be plotted or not
     """
 
     # Divide And Conquer Algorithm
@@ -282,3 +286,72 @@ def run_divide_and_conquer_closest_pair(points, answer):
     # Closest Pair and Their Distance
     output = "First Point: " + str(pair[0]) + "\n" + "Second Point: " + str(pair[1]) + "\n" + f"Minimum Distance: {min_distance}\n" + "Euclidean Calculations Done: " + str(ed_count[0]) + "\n" + f"Execution Time: {(end_time - start_time) * 1000} ms\n"
     answer.set(output)
+
+    # If the dimension below or equal to 3
+    if(is3D):
+        # Create a 3D scatter plot
+        figure = plt.figure(figsize=(6, 6))
+        ax = figure.add_subplot(111, projection='3d')
+
+        # Filter points
+        x = [p[0] for p in points if p != pair[0] and p != pair[1]]
+        if(len(pair[0]) >= 2):
+            y = [p[1] for p in points if p != pair[0] and p != pair[1]]
+        if(len(pair[0]) >= 3):
+            z = [p[2] for p in points if p != pair[0] and p != pair[1]]
+
+        # Scatter plot
+        if(len(pair[0]) == 1):
+            ax.scatter(x, 0, 0, alpha=0.25)
+        elif(len(pair[0]) == 2):
+            ax.scatter(x, y, 0, alpha=0.25)
+        else:
+            ax.scatter(x, y, z, alpha=0.25)
+        
+        if(len(pair[0]) == 1):
+            ax.scatter(pair[0][0], 0, 0)
+            ax.scatter(pair[1][0], 0, 0)
+        elif(len(pair[0]) == 2):
+            ax.scatter(pair[0][0], pair[0][1], 0)
+            ax.scatter(pair[1][0], pair[1][1], 0)
+        else:
+            ax.scatter(pair[0][0], pair[0][1], pair[0][2])
+            ax.scatter(pair[1][0], pair[1][1], pair[1][2])
+
+        # Set the axis labels
+        ax.set_xlabel('X')
+        if(len(pair[0]) >= 2):
+            ax.set_ylabel('Y')
+        if(len(pair[0]) >= 3):
+            ax.set_zlabel('Z')
+
+        # Plot a line between the two points
+        if(len(pair[0]) == 1):
+            ax.plot([pair[0][0], pair[1][0]], [0, 0], [0, 0], "Red")
+        elif(len(pair[0]) == 2):
+            ax.plot([pair[0][0], pair[1][0]], [pair[0][1], pair[1][1]], [0, 0], "Red")
+        else:
+            ax.plot([pair[0][0], pair[1][0]], [pair[0][1], pair[1][1]], [pair[0][2], pair[1][2]], "Red")
+
+        # Set Plot Title
+        ax.set_title("3D Scatter Plot")
+
+        # Destroy last plot
+        if output:
+            for child in canvas.winfo_children():
+                child.destroy()
+        output = None
+        
+        # Show the plot
+        output = FigureCanvasTkAgg(figure, master = canvas)
+        output.draw()
+        toolbar = NavigationToolbar2Tk(output,
+                                    canvas)
+        toolbar.update()
+        output.get_tk_widget().pack()
+
+    else: # Destroy last plot if exists
+        if output:
+            for child in canvas.winfo_children():
+                child.destroy()
+        output = None

@@ -64,11 +64,11 @@ def display_solution(event):
 
             # Display plot if dimension below than or equal to 3
             if(dimension <= 3):
-                run_brute_force_closest_pair(points, answer1, canvas, True)
-                run_divide_and_conquer_closest_pair(points, answer2)
+                run_brute_force_closest_pair(points, answer1)
+                run_divide_and_conquer_closest_pair(points, answer2, canvas, True)
             else:
-                run_brute_force_closest_pair(points, answer1, canvas, False)
-                run_divide_and_conquer_closest_pair(points, answer2)
+                run_brute_force_closest_pair(points, answer1)
+                run_divide_and_conquer_closest_pair(points, answer2, canvas, False)
     else:
         # Display error
         mb.showerror(title="Error", message="Don't forget to input N and dimension.")
