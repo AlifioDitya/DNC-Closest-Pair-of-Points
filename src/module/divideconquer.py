@@ -220,11 +220,10 @@ def findClosestPairInStrip(left_p, right_p, x, temp_min, temp_pair, count):
     # Finding pair of points that are more closer than the initial pair
     for point1 in left_strip_points:
         for point2 in right_strip_points:
-            if(abs(point1[i] - point2[i]) <= new_min for i in range (len(point1))):
-                valid, newDistance = findSmallerThanMinimumDistance(point1, point2, new_min, count)
-                if(valid):
-                    new_min = newDistance
-                    new_pair = (point1, point2)
+            valid, newDistance = findSmallerThanMinimumDistance(point1, point2, new_min, count)
+            if(valid):
+                new_min = newDistance
+                new_pair = (point1, point2)
     
     return new_min, new_pair
 
