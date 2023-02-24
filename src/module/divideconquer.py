@@ -193,8 +193,6 @@ def findClosestPairInStrip(left_p, right_p, x, temp_min, temp_pair, count):
     """
 
     left_strip_points, right_strip_points = ClassifyPointsInStrip(left_p, right_p, x, temp_min)
-    print("LS", left_strip_points)
-    print("RS", right_strip_points)
     new_min = temp_min
     new_pair = temp_pair
     for point1 in left_strip_points:
@@ -220,12 +218,9 @@ def findClosestPair(points, count):
         return -1, ()
     elif(len(points) == 2):
         count[0] += 1
-        print(points[0].distance_to(points[1]))
         return points[0].distance_to(points[1]), (points[0], points[1])
     else:
         left_points, right_points, x = splitPoints(points)
-        print("LP", left_points)
-        print("RP", right_points)
         min_left, pair_left = findClosestPair(left_points, count)
         min_right, pair_right = findClosestPair(right_points, count)
         temp_min = min_left if min_left < min_right and min_left >= 0 else min_right

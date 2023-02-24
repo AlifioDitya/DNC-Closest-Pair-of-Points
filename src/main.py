@@ -78,10 +78,10 @@ input_n = Entry(firstInput, width = 20)
 input_n.focus_set()
 input_n.pack()
 
-secondInput = tk.Frame(inputs)
+secondInput = tk.Frame(inputs, background='#1C1C1C')
 secondInput.pack(anchor="w")
 
-label_input_dimension = tk.Label(master=secondInput, text="Dimension                = ", font=("Helvetica", 10), background='#1C1C1C', foreground="white")
+label_input_dimension = tk.Label(master=secondInput, text="Dimension                 = ", font=("Helvetica", 10), background='#1C1C1C', foreground="white")
 label_input_dimension.pack(side=LEFT)
 input_dimension = Entry(secondInput, width = 20)
 input_dimension.focus_set()
@@ -90,7 +90,7 @@ input_dimension.pack()
 buttons = tk.Frame(window, background='#1C1C1C')
 buttons.pack(padx=50, pady=10)
 
-button1 = tk.Button(master=buttons, text="Calculate", background='#1C1C1C', foreground="white", font=("Helvetica", 9 ,"bold"))
+button1 = tk.Button(master=buttons, text="Calculate", bg='#1C1C1C', fg="white")
 button1.pack(side=LEFT, padx=10)
 button1.bind("<Button-1>", display_solution)
 
