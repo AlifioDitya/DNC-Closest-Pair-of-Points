@@ -9,15 +9,25 @@ from tkinter import messagebox as mb
 import random
 from module.Point import Point
 
-# Function to generate points
 def generate_points(n, dimension):
+    """
+    Generate n points that has d dimension
+
+    Args:
+        n (int): number of points
+        dimension (int): the dimension of the points
+
+    Returns:
+        points (list) : list of points
+    """
+
     # Generate random data
     coordinates = []
     for _ in range (dimension):
         temp_coordinate = [random.randint(1, n) for _ in range(n)]
         coordinates.append(temp_coordinate)
 
-    # Pack the data into Point objects
+    # Pack the data into List of Point Objects
     points = []
     for i in range (n):
         temp = []
@@ -30,15 +40,29 @@ def generate_points(n, dimension):
 
 # Function to display solution on GUI
 def display_solution(event):
-    if(input_n.get() != "" and input_dimension.get() != ""):
+    """
+    Display solutions and plot on the GUI
+
+    Args:
+        event (event): Event handler
+    """
+
+    # Validate input n and input dimension
+    if(input_n.get() != "" and input_dimension.get() != "" and input_n.get().isnumeric() and input_dimension.get().isnumeric()):
         n = int(input_n.get())
         dimension = int(input_dimension.get())
         if(n <= 1 or dimension <= 0):
+            # Display error
             mb.showerror(title="Error", message="Input not valid. N must be greater than 1 and Dimension must be greater than 0.")
         else:
+            # Set title of solution
             titlebf.set("Brute Force")
             titlednc.set("Divide and Conquer")
+
+            # Generate list of point objects
             points = generate_points(n, dimension)
+
+            # Display plot if dimension below than or equal to 3
             if(dimension <= 3):
                 run_brute_force_closest_pair(points, answer1, canvas, True)
                 run_divide_and_conquer_closest_pair(points, answer2)
@@ -46,6 +70,7 @@ def display_solution(event):
                 run_brute_force_closest_pair(points, answer1, canvas, False)
                 run_divide_and_conquer_closest_pair(points, answer2)
     else:
+        # Display error
         mb.showerror(title="Error", message="Don't forget to input N and dimension.")
 
 # Initializing GUI
@@ -55,17 +80,22 @@ answer2 = tk.StringVar()
 titlebf = tk.StringVar()
 titlednc = tk.StringVar()
 
+# Configure background
 window.configure(background='#1C1C1C')
 
+# Configure resolution and title
 window.geometry("1280x720")
 window.title("Closest Pair of Points App")
 
+# Create label for app's name
 label1 = tk.Label(master=window, text="Closest Pair of Points", font=("Helvetica", 24, 'bold'), background='#1C1C1C', foreground="white")
 label1.pack(padx=50)
 
+# Create label for group identity
 label2 = tk.Label(master=window, text="by: Michael Jonathan Halim | 13521124\n      Enrique Alifio Ditya         | 13521142", font=("Helvetica", 14), background='#1C1C1C', foreground="white")
 label2.pack(padx=50)
 
+# Create input widgets
 inputs = tk.Frame(window, background='#1C1C1C')
 inputs.pack(padx=50)
 
@@ -87,6 +117,7 @@ input_dimension = Entry(secondInput, width = 20)
 input_dimension.focus_set()
 input_dimension.pack()
 
+# Create button to calculate
 buttons = tk.Frame(window, background='#1C1C1C')
 buttons.pack(padx=50, pady=10)
 
@@ -94,6 +125,7 @@ button1 = tk.Button(master=buttons, text="Calculate", bg='#1C1C1C', fg="white")
 button1.pack(side=LEFT, padx=10)
 button1.bind("<Button-1>", display_solution)
 
+# Create widget for solutions
 answers = tk.Frame(window, background='#1C1C1C')
 answers.pack(padx=50)
 
@@ -115,6 +147,7 @@ subtitle2.pack()
 label4 = tk.Label(master=dnclabel, textvariable=answer2, font=("Comic Sans MS", 10), background='#1C1C1C', foreground="white")
 label4.pack()
 
+# Create widget to show plot
 canvas = Canvas(window, background='#1C1C1C', bd=0, highlightthickness=0, relief='ridge') 
 canvas.pack(padx=50, pady=(0,10))
 

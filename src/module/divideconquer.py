@@ -101,6 +101,7 @@ def createDivide(points):
         x : Coordinate to split on
     """
 
+    # Calculate the middle x coordinate to split the points
     x = (points[len(points) // 2 - 1][0] + points[len(points) // 2][0]) / 2
     return x
 
@@ -118,6 +119,7 @@ def splitPoints(points):
         x : Coordinate to split on
     """
 
+    # Divide points into left and right zone with each contains half size of the initial size
     x = createDivide(points)
     left_points = []
     right_points = []
@@ -140,9 +142,11 @@ def ClassifyPointsInStrip(left_p, right_p, x, temp_min):
         temp_min : The current minimum distance
 
     Returns:
-        strip_points : a list of Point objects inside of the strip zone
+        left_strip_points : a list of Point objects inside of the left strip zone
+        right_strip_points : a list of Point objects inside of the right strip zone
     """
 
+    # Classifying points into left and right strip zone
     left_strip_points = []
     i = len(left_p) - 1
     while(i >= 0 and abs(left_p[i][0] - x) <= temp_min):
@@ -165,13 +169,17 @@ def findSmallerThanMinimumDistance(point1, point2, distance, count):
         point1 : a Point object
         point2 : a Point object
         distance : The current minimum distance
+        count : euclidean calculation count
 
     Returns:
         boolean : True if smaller than the current minimum distance
         temp_distance : the new minimum distance
     """
+
+    # If abs(x1-x2) or abs(y1-y2) are smaller or equal to the current minimum distance
     if(abs(point1[0] - point2[0]) <= distance or (len(point1) > 1 and abs(point1[1] - point2[1]) <= distance)):
         count[0] += 1
+        # Calculate euclidean distance
         temp_distance = point1.distance_to(point2)
         if(temp_distance < distance):
             return True, temp_distance
@@ -187,14 +195,21 @@ def findClosestPairInStrip(left_p, right_p, x, temp_min, temp_pair, count):
         right_p : a list of Point objects with coordinate on the right of split
         x : Coordinate to split on
         temp_min : The current minimum distance
+        temp_pair : The current closest pair of point
 
     Returns:
         new_min : New minimum distance
+        new_pair : New closest pair of point
     """
 
+    # Classify points into left and right strip zone
     left_strip_points, right_strip_points = ClassifyPointsInStrip(left_p, right_p, x, temp_min)
+    
+    # Initialize the current minimum distance and the closest pair
     new_min = temp_min
     new_pair = temp_pair
+
+    # Finding pair of points that are more closer than the initial pair
     for point1 in left_strip_points:
         for point2 in right_strip_points:
             valid, newDistance = findSmallerThanMinimumDistance(point1, point2, new_min, count)
@@ -210,28 +225,52 @@ def findClosestPair(points, count):
 
     Args:
         points : a list of Point objects
+        count : euclidean calculation count
 
     Returns:
         distance : the smallest distance
+        pair : pair of points with the smallest distance
     """
+
+    # Handle case for n != 2^k
     if(len(points) <= 1):
         return -1, ()
+    # Base Recurrens
     elif(len(points) == 2):
         count[0] += 1
         return points[0].distance_to(points[1]), (points[0], points[1])
     else:
+        # Splitting Points
         left_points, right_points, x = splitPoints(points)
+
+        # Finding closest pair of points on the left side
         min_left, pair_left = findClosestPair(left_points, count)
+
+        # Finding closest pair of points on the right side
         min_right, pair_right = findClosestPair(right_points, count)
+
+        # Find the minimum distance and closest pair of points between left side and right side
         temp_min = min_left if min_left < min_right and min_left >= 0 else min_right
         new_pair = pair_left if min_left < min_right and min_left >= 0 else pair_right
+        
+        # Find the minimum distance and closest pair of points between the strip zone
         min_strip, pair_strip = findClosestPairInStrip(left_points, right_points, x, temp_min, new_pair, count)
+        
+        # Return the minimum distance and the closest pair of points
         if(min_strip < temp_min):
             return min_strip, pair_strip
         else:
             return temp_min, new_pair
 
 def run_divide_and_conquer_closest_pair(points, answer):
+    """
+    Run divide and conquer algorithm to the closest pair of points problem and display the solution on GUI
+
+    Args:
+        points (list): list of point objects
+        answer (string): solution
+    """
+
     # Divide And Conquer Algorithm
     start_time = time.time()
     points = quicksort(points, 0 , len(points) - 1)
@@ -241,5 +280,5 @@ def run_divide_and_conquer_closest_pair(points, answer):
 
     # Output
     # Closest Pair and Their Distance
-    output = "First Point: " + str(pair[0]) + "\n" + "Second Point: " + str(pair[1]) + "\n" + f"Minimum Distance: {min_distance}\n" + "Euclidian Calculation Count: " + str(ed_count[0]) + "\n" + f"Execution Time: {(end_time - start_time) * 1000} ms\n"
+    output = "First Point: " + str(pair[0]) + "\n" + "Second Point: " + str(pair[1]) + "\n" + f"Minimum Distance: {min_distance}\n" + "Euclidean Calculations Done: " + str(ed_count[0]) + "\n" + f"Execution Time: {(end_time - start_time) * 1000} ms\n"
     answer.set(output)

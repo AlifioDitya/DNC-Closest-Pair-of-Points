@@ -34,6 +34,16 @@ def brute_force_closest_pair(space):
     
 
 def run_brute_force_closest_pair(points, answer, canvas, is3D):
+    """
+    Run brute force algorithm to solve the closest pair of points problem and display solution on GUI
+
+    Args:
+        points (list): list of point objects
+        answer (string): solution
+        canvas (widget): widget to display plot on GUI
+        is3D (boolean): check if the points can be plotted or not
+    """
+
     # Defining n
     n = len(points)
 
@@ -44,9 +54,10 @@ def run_brute_force_closest_pair(points, answer, canvas, is3D):
 
     # Output
     # Closest Pair and Their Distance
-    output = "First Point: " + str(p1) + "\n" + "Second Point: " + str(p2) + "\n" + f"Minimum Distance: {p1.distance_to(p2)}\n" + "Euclidian Calculation Count: " + str(int((n-1) * n / 2)) + "\n" + f"Execution Time: {(end_time - start_time) * 1000} ms\n"
+    output = "First Point: " + str(p1) + "\n" + "Second Point: " + str(p2) + "\n" + f"Minimum Distance: {p1.distance_to(p2)}\n" + "Euclidean Calculations Done: " + str(int((n-1) * n / 2)) + "\n" + f"Execution Time: {(end_time - start_time) * 1000} ms\n"
     answer.set(output)
-
+    
+    # If the dimension below or equal to 3
     if(is3D):
         # Create a 3D scatter plot
         figure = plt.figure(figsize=(6, 6))
