@@ -55,25 +55,24 @@ answer2 = tk.StringVar()
 titlebf = tk.StringVar()
 titlednc = tk.StringVar()
 
-frame = tk.Frame(master=window, width=1280, height=720)
-frame.pack()
+window.configure(background='#1C1C1C')
 
 window.geometry("1280x720")
 window.title("Closest Pair of Points App")
 
-label1 = tk.Label(master=frame, text="Closest Pair of Points", font=("Courier", 24))
+label1 = tk.Label(master=window, text="Closest Pair of Points", font=("Helvetica", 24, 'bold'), background='#1C1C1C', foreground="white")
 label1.pack(padx=50)
 
-label2 = tk.Label(master=frame, text="by: Michael Jonathan Halim | 13521124\n    Enrique Alifio Ditya   | 13521142", font=("Courier", 14))
+label2 = tk.Label(master=window, text="by: Michael Jonathan Halim | 13521124\n      Enrique Alifio Ditya         | 13521142", font=("Helvetica", 14), background='#1C1C1C', foreground="white")
 label2.pack(padx=50)
 
-inputs = tk.Frame(frame)
+inputs = tk.Frame(window, background='#1C1C1C')
 inputs.pack(padx=50)
 
-firstInput = tk.Frame(inputs)
+firstInput = tk.Frame(inputs, background='#1C1C1C')
 firstInput.pack(pady=10, anchor="w")
 
-label_input_n = tk.Label(master=firstInput, text="N (number of points) = ", font=("Courier", 10))
+label_input_n = tk.Label(master=firstInput, text="N (number of points)  = ", font=("Helvetica", 10), background='#1C1C1C', foreground="white")
 label_input_n.pack(side=LEFT)
 input_n = Entry(firstInput, width = 20)
 input_n.focus_set()
@@ -82,41 +81,41 @@ input_n.pack()
 secondInput = tk.Frame(inputs)
 secondInput.pack(anchor="w")
 
-label_input_dimension = tk.Label(master=secondInput, text="Dimension            = ", font=("Courier", 10))
+label_input_dimension = tk.Label(master=secondInput, text="Dimension                = ", font=("Helvetica", 10), background='#1C1C1C', foreground="white")
 label_input_dimension.pack(side=LEFT)
 input_dimension = Entry(secondInput, width = 20)
 input_dimension.focus_set()
 input_dimension.pack()
 
-buttons = tk.Frame(frame)
+buttons = tk.Frame(window, background='#1C1C1C')
 buttons.pack(padx=50, pady=10)
 
-button1 = tk.Button(master=buttons, text="Calculate")
+button1 = tk.Button(master=buttons, text="Calculate", background='#1C1C1C', foreground="white", font=("Helvetica", 9 ,"bold"))
 button1.pack(side=LEFT, padx=10)
 button1.bind("<Button-1>", display_solution)
 
-answers = tk.Frame(frame)
+answers = tk.Frame(window, background='#1C1C1C')
 answers.pack(padx=50)
 
-bflabel = tk.Frame(answers)
+bflabel = tk.Frame(answers, background='#1C1C1C')
 bflabel.pack(side=LEFT, padx=20)
 
-dnclabel = tk.Frame(answers)
+dnclabel = tk.Frame(answers, background='#1C1C1C')
 dnclabel.pack()
 
-subtitle1 = tk.Label(master=bflabel, textvariable=titlebf, font=("Courier", 15))
+subtitle1 = tk.Label(master=bflabel, textvariable=titlebf, font=("Helvetica", 15), background='#1C1C1C', foreground="white")
 subtitle1.pack()
 
-label3 = tk.Label(master=bflabel, textvariable=answer1, font=("Courier", 10))
+label3 = tk.Label(master=bflabel, textvariable=answer1, font=("Comic Sans MS", 10), background='#1C1C1C', foreground="white")
 label3.pack()
 
-subtitle2 = tk.Label(master=dnclabel, textvariable=titlednc, font=("Courier", 15))
+subtitle2 = tk.Label(master=dnclabel, textvariable=titlednc, font=("Helvetica", 15), background='#1C1C1C', foreground="white")
 subtitle2.pack()
 
-label4 = tk.Label(master=dnclabel, textvariable=answer2, font=("Courier", 10))
+label4 = tk.Label(master=dnclabel, textvariable=answer2, font=("Comic Sans MS", 10), background='#1C1C1C', foreground="white")
 label4.pack()
 
-canvas = Canvas(frame) 
+canvas = Canvas(window, background='#1C1C1C', bd=0, highlightthickness=0, relief='ridge') 
 canvas.pack(padx=50, pady=(0,10))
 
 window.mainloop()

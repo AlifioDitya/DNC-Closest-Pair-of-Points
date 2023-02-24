@@ -1,6 +1,5 @@
 import time
 import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
 from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg, NavigationToolbar2Tk)
 
 def brute_force_closest_pair(space):
@@ -45,7 +44,7 @@ def run_brute_force_closest_pair(points, answer, canvas, is3D):
 
     # Output
     # Closest Pair and Their Distance
-    output = "First Point: " + str(p1) + "\n\n" + "Second Point: " + str(p2) + "\n\n" + f"Minimum Distance: {p1.distance_to(p2)}\n\n" + "Euclidian Calculation Count: " + str(int((n-1) * n / 2)) + "\n\n" + f"Execution Time: {(end_time - start_time) * 1000} ms\n\n"
+    output = "First Point: " + str(p1) + "\n" + "Second Point: " + str(p2) + "\n" + f"Minimum Distance: {p1.distance_to(p2)}\n" + "Euclidian Calculation Count: " + str(int((n-1) * n / 2)) + "\n" + f"Execution Time: {(end_time - start_time) * 1000} ms\n"
     answer.set(output)
 
     if(is3D):
