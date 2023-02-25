@@ -24,8 +24,9 @@ def brute_force_closest_pair(space):
     # Brute force by checking distance to each other for each points in space
     for i in range (len(space)):
         for j in range (i + 1, len(space)):
-            if space[i].distance_to(space[j]) < min_distance:
-                min_distance = space[i].distance_to(space[j])
+            distance = space[i].distance_to(space[j])
+            if distance < min_distance:
+                min_distance = distance
                 pair = (space[i], space[j])
 
     return pair
