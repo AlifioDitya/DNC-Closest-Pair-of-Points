@@ -293,6 +293,10 @@ def run_divide_and_conquer_closest_pair(points, answer, canvas, is3D):
     output = "First Point: " + str(pair[0]) + "\n" + "Second Point: " + str(pair[1]) + "\n" + f"Minimum Distance: {min_distance}\n" + "Euclidean Calculations Done: " + str(ed_count[0]) + "\n" + f"Execution Time: {(end_time - start_time) * 1000} ms\n"
     answer.set(output)
 
+    # Print solution in terminal
+    print("Solution by divide and conquer :")
+    print(output)
+
     # If the dimension below or equal to 3
     if(is3D):
         # Create a 3D scatter plot

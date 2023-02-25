@@ -53,3 +53,7 @@ def run_brute_force_closest_pair(points, answer):
     # Closest Pair and Their Distance
     output = "First Point: " + str(p1) + "\n" + "Second Point: " + str(p2) + "\n" + f"Minimum Distance: {p1.distance_to(p2)}\n" + "Euclidean Calculations Done: " + str(int((n-1) * n / 2)) + "\n" + f"Execution Time: {(end_time - start_time) * 1000} ms\n"
     answer.set(output)
+    
+    # Print solution in terminal
+    print("Solution by brute force :")
+    print(output)
