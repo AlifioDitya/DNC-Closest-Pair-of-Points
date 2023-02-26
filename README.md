@@ -3,6 +3,8 @@
 
 This repository contains a program written in Python to find the closest pair of points in $R^n$ Euclidean space using divide and conquer technique. This program is a part of [Bandung Institute of Technology](https://www.itb.ac.id/) IF2211 Algorithm Strategies course project.
 
+![image](https://user-images.githubusercontent.com/103266159/221415343-f2d26f25-89f9-4e5a-81fc-4e9fef47db9e.png)
+
 ## Getting Started
 To use this program, you need to have Python 3 installed on your system. You can download Python 3 from the official website: https://www.python.org/downloads/
 
@@ -16,15 +18,15 @@ A few external dependencies also needs to be installed. Below listed are the lib
 ## Setup
 1. Clone the repository to your local machine
     ``` bash
-        $ git clone https://github.com/AlifioDitya/Tucil2_13521142_13521124.git 
+    $ git clone https://github.com/AlifioDitya/Tucil2_13521142_13521124.git 
     ```
 2. Change directory to the `src` folder
     ``` bash
-        $ cd src
+    $ cd src
     ```
 3. Run `main.py`
     ``` bash
-        $ python3 main.py
+    $ python3 main.py
     ```
 
 ## Usage
