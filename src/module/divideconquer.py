@@ -1,4 +1,5 @@
 import time
+import math
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg, NavigationToolbar2Tk)
 
@@ -185,12 +186,12 @@ def findSmallerThanMinimumDistance(point1, point2, distance, count):
         check += (abs(point1[i] - point2[i]) ** 2)
         if(check > threshold):
             return False, 0
-    
+
     # Calculate euclidean distance
     count[0] += 1
-    temp_distance = point1.distance_to(point2)
-    if(temp_distance < distance):
-        return True, temp_distance
+    check = math.sqrt(check)
+    if(check < distance):
+        return True, check
     
     return False, 0
 
