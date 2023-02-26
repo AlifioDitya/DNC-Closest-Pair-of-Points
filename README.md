@@ -1,7 +1,7 @@
-# Algorithm Strategies Course Project
+# IF2211 Algorithm Strategies Course Project
 ## Closest Pair of Points in $R^n$ Euclidean Space with Divide and Conquer
 
-This repository contains a program written in Python to find the closest pair of points in R^n Euclidean space using divide and conquer technique. This program is a part of the Algorithm Strategies course project.
+This repository contains a program written in Python to find the closest pair of points in $R^n$ Euclidean space using divide and conquer technique. This program is a part of [Bandung Institute of Technology](https://www.itb.ac.id/) IF2211 Algorithm Strategies course project.
 
 ## Getting Started
 To use this program, you need to have Python 3 installed on your system. You can download Python 3 from the official website: https://www.python.org/downloads/
